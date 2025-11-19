@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>திருக்குறள் Semantic Analyzer | 1,330 Verses | 100% Offline</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1>🔍 திருக்குறள் Semantic Analyzer</h1>
+            <p class="subtitle">திருக்குறள் | 1,330 Verses | 100% Offline | Completely FREE</p>
+            <div class="status-badge">
+                <span class="status-dot"></span>
+                <span>Offline Mode Active</span>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Input Section -->
+            <section class="input-section">
+                <h2>📝 உரையை உள்ளிடவும் (Enter Tamil Text)</h2>
+                <textarea 
+                    id="tamilInput" 
+                    class="tamil-input" 
+                    placeholder="உங்கள் தமிழ் உரையை இங்கே உள்ளிடவும்...
+எடுத்துக்காட்டு: அகர முதல எழுத்தெல்லாம் ஆதி பகவன் முதற்றே உலகு"
+                    rows="6"
+                ></textarea>
+                
+                <div class="button-group">
+                    <button id="analyzeBtn" class="btn btn-primary">
+                        🔍 Analyze Text
+                    </button>
+                    <button id="clearBtn" class="btn btn-secondary">
+                        🗑️ Clear
+                    </button>
+                </div>
+
+                <!-- Character Count -->
+                <div class="char-count">
+                    <span id="charCount">0</span> characters
+                </div>
+            </section>
+
+            <!-- Results Section -->
+            <section class="results-section" id="resultsSection" style="display: none;">
+                <h2>📊 Analysis Results</h2>
+                
+                <!-- Loading Spinner -->
+                <div id="loadingSpinner" class="loading-spinner" style="display: none;">
+                    <div class="spinner"></div>
+                    <p>Analyzing text...</p>
+                </div>
+
+                <!-- Results Content -->
+                <div id="resultsContent" class="results-content">
+                    <!-- Header -->
+                    <div class="result-header" id="resultHeader"></div>
+
+                    <!-- Verse (if found) -->
+                    <div class="result-verse" id="resultVerse" style="display: none;">
+                        <h3>📖 பாடல்:</h3>
+                        <p class="verse-text" id="verseText"></p>
+                    </div>
+
+                    <!-- Meaning -->
+                    <div class="result-meaning" id="resultMeaning">
+                        <h3>📝 பொருள்:</h3>
+                        <p class="meaning-text" id="meaningText"></p>
+                    </div>
+
+                    <!-- Summary -->
+                    <div class="result-summary" id="resultSummary">
+                        <h3>💡 சுருக்கமாக:</h3>
+                        <p class="summary-text" id="summaryText"></p>
+                    </div>
+
+                    <!-- Sentiment -->
+                    <div class="result-sentiment" id="resultSentiment">
+                        <h3>😊 Sentiment Analysis:</h3>
+                        <div class="sentiment-badge" id="sentimentBadge"></div>
+                        <div class="confidence-bar">
+                            <div class="confidence-label">Confidence:</div>
+                            <div class="confidence-meter">
+                                <div class="confidence-fill" id="confidenceFill"></div>
+                            </div>
+                            <div class="confidence-value" id="confidenceValue"></div>
+                        </div>
+                    </div>
+
+                    <!-- Source Info -->
+                    <div class="result-info">
+                        <span class="info-badge" id="sourceBadge"></span>
+                    </div>
+                </div>
+
+                <!-- Error Message -->
+                <div id="errorMessage" class="error-message" style="display: none;"></div>
+            </section>
+
+            <!-- Examples Section -->
+            <section class="examples-section">
+                <h2>📖 திருக்குறள் Examples - Try These Verses</h2>
+                <div class="examples-grid">
+                    <div class="example-card" onclick="loadExample(this)">
+                        <div class="example-number">திருக்குறள் 1</div>
+                        <p class="example-text">அகர முதல எழுத்தெல்லாம் ஆதி பகவன் முதற்றே உலகு</p>
+                    </div>
+                    <div class="example-card" onclick="loadExample(this)">
+                        <div class="example-number">திருக்குறள் 2</div>
+                        <p class="example-text">கற்க கசடறக் கற்பவை கற்றபின் நிற்க அதற்குத் தக</p>
+                    </div>
+                    <div class="example-card" onclick="loadExample(this)">
+                        <div class="example-number">திருக்குறள் 10</div>
+                        <p class="example-text">பிறவிப் பெருங்கடல் நீந்துவர் நீந்தார் இறைவன் அடி சேராதார்</p>
+                    </div>
+                    <div class="example-card" onclick="loadExample(this)">
+                        <div class="example-number">திருக்குறள் 30</div>
+                        <p class="example-text">நன்றி மறப்பது நன்றன்று நன்றல்லது அன்றே மறப்பது நன்று</p>
+                    </div>
+                    <div class="example-card" onclick="loadExample(this)">
+                        <div class="example-number">திருக்குறள் 100</div>
+                        <p class="example-text">தோல்வி இலாத வெற்றி மாற்றி தாக்கல் இலாதது போர்</p>
+                    </div>
+                    <div class="example-card" onclick="loadExample(this)">
+                        <div class="example-number">திருக்குறள் 200</div>
+                        <p class="example-text">இனிய உளவாக இன்னாத கூறல் கனியிருப்பக் காய்கவர்ந் தற்று</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>Made with ❤️ for Tamil language preservation | 100% Open Source</p>
+            <p class="tech-stack">
+                திருக்குறள் - திருவள்ளுவர் | 1,330 Verses | All Chapters Included
+            </p>
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>
